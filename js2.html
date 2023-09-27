@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>reverse string</title>
+</head>
+<body>
+  <h1>revere sting</h1>
+  <label for="inputString">Enter a string:</label>
+  <input type="text" id="inputString">
+  <button onclick="sortString()">Sort</button>
+  <p>Sorted String: <span id="sortedResult"></span></p>
+
+  <script>
+    function sortString() {
+      const inputString = document.getElementById('inputString').value;
+      const sortedResultElement = document.getElementById('sortedResult');
+      
+      // Convert the input string to an array of characters, sort it, and join it back into a string
+      const sortedString = inputString.split('').sort().join('');
+      
+      sortedResultElement.textContent = sortedString;
+    }
+  </script>
+</body>
+</html>

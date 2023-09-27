@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Js Task 8</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+
+        .form {
+            width: 60%;
+            background-color: hsla(0, 100%, 50%, 0.3);;
+            padding: 20px; 
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        #address {
+            width: 100%;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        table {
+            display: inline-block;
+            text-align: left;
+        }
+
+        #tr1 {
+            text-align: right;
+        }
+
+        .strength-poor {
+            color: red;
+        }
+
+        .strength-moderate {
+            color: orange;
+        }
+
+        .strength-strong {
+            color: green;
+        }
+
+        .match {
+            color: red;
+            display: none;
+        }
+
+        button {
+            background-color: maroon;
+            border-radius: 60px;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+        
+    </style>
+</head>
+<body>
+</body>
+<div class="container">
+<form class="form">
+    <h1>Registration Form</h1>
+    <table>
+        <tr >
+            <td>First Name</td>
+            <td class="form-row"><input type="text" id="fname" onkeyup="strengthChecker()"> <span id="msg" class="strength-poor">Poor</span></td>
+        </tr>
+
+        <tr>
+            <td>Last Name</td>
+            <td class="form-row"><input type="text" id="lname" onkeyup="strengthChecker()"><span id="msg2" class="strength-poor">Poor</span></td>
+        </tr>   
+
+        <tr>
+            <td>Email</td>
+            <td class="form-row"><input type="email" id="email" onkeyup="strengthChecker()"><span id="msg3" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>Password</td>
+            <td><input type="password" id="password" onkeyup="strengthChecker()"><span id="msg4" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>Re Password</td>
+            <td><input type="password" id="rePassword" onkeyup="strengthChecker()"><span id="msg5" class="strength-poor">Poor or Mismatched</span></td>
+        </tr> 
+
+        <tr>
+            <td rowspan="2">Gender</td>
+            <td><input type="radio" name="Gender">Male</td>
+        </tr>
+        
+        <tr>
+            <td><input type="radio" name="Gender">Female</td>
+        </tr>
+
+        <tr>
+            <td>Age :</td>
+            <td><input type="number" id="age" onkeyup="strengthChecker()"><span id="msg6" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>Phone Number :</td>
+            <td><input type="number" id = "phnum" onkeyup="strengthChecker()"><span id="msg7" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>Address :</td>
+            <td><textarea id="address" onkeyup="strengthChecker()"></textarea><span id="msg8" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>State :</td>
+            <td><input type="text" id="state" onkeyup="strengthChecker()"><span id="msg9" class="strength-poor">Poor</span></td>
+        </tr> 
+
+        <tr>
+            <td>Country</td>
+            <td>
+            <select>
+                <option selected>Choose your Country</option>
+                <option>India</option>
+                <option>USA</option>
+                <option>Russia</option>
+            </select></td>
+        </tr> 
+
+        <tr>
+            <td>Languages Known :</td>
+            <td>
+                <input type="checkbox">English
+                <input type="checkbox">Kannada
+                <input type="checkbox">Hindi
+                <input type="checkbox">Telugu
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2"><input type="checkbox">Hereby I declare all the given details are true</td>
+        </tr>
+        <tr id="tr1">
+            <td colspan="2">Log in to <a href="https://ethnus.com/">Ethnus</a> Website</td>
+        </tr>
+    </table><br>
+    
+    <button type="submit">Register</button>
+</form>
+</body>
+</div>
+
+<script>
+    function strengthChecker() {
+        // first name
+        var fname = document.getElementById("fname").value;
+        var strengthIndicator = document.getElementById("msg");
+        
+        if (fname.length == 0) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (fname.length < 5) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+
+       // last name 
+        var lname = document.getElementById("lname").value;
+        var strengthIndicator = document.getElementById("msg2");
+        
+        if (lname.length == 0) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (lname.length < 5) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+
+
+        // email
+        var email = document.getElementById("email").value;
+        var strengthIndicator = document.getElementById("msg3");
+        var re = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+        if (re.test(email)) {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        } else {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+}
+        // Password
+        var password = document.getElementById("password").value;
+        var strengthIndicator = document.getElementById("msg4");
+        
+        if (password.length <= 4) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (password.length < 8) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+
+        //re passowrd
+        var rePassword = document.getElementById("rePassword").value;
+        var strengthIndicator = document.getElementById("msg5");
+
+        if(password==rePassword){
+            strengthIndicator.innerHTML = "Matched";
+            strengthIndicator.className = "strength-strong";
+        }else{
+            strengthIndicator.innerHTML = "Mismatched";
+            strengthIndicator.className = "strength-poor";
+        }
+
+        //age
+        var age = document.getElementById("age").value;
+        var strengthIndicator = document.getElementById("msg6");
+        
+        if (age < 12) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (age < 18) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+
+        //number
+        var phnum = document.getElementById("phnum").value;
+        var strengthIndicator = document.getElementById("msg7");
+        
+        if (phnum.length == 10) {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        } else {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        }
+
+        //address
+        var address = document.getElementById("address").value;
+        var strengthIndicator = document.getElementById("msg8");
+        
+        if (address.length <= 20) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (address.length < 30) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+
+        //State
+        var address = document.getElementById("state").value;
+        var strengthIndicator = document.getElementById("msg9");
+        
+        if (address.length == 0) {
+            strengthIndicator.innerHTML = "Poor";
+            strengthIndicator.className = "strength-poor";
+        } else if (address.length < 5) {
+            strengthIndicator.innerHTML = "Moderate";
+            strengthIndicator.className = "strength-moderate";
+        } else {
+            strengthIndicator.innerHTML = "Strong";
+            strengthIndicator.className = "strength-strong";
+        }
+        
+    }
+</script>
+
+
+
+</body>
+</html>

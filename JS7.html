@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_Task-7</title>
+    <script type="text/javascript">
+        var imgObj = null;
+        var animate;
+
+        function init() {
+            imgObj = document.getElementById('myImage');
+            imgObj.style.position = 'relative';
+            imgObj.style.left = '0px';
+        }
+
+        function moveRight() {
+            var currentPosition = parseInt(imgObj.style.left);
+            var newPosition = currentPosition + 10;
+            imgObj.style.left = newPosition + 'px';
+
+            if (newPosition < window.innerWidth) {
+                animate = setTimeout(moveRight, 40);
+            } else {
+                // Reset the image position to the beginning
+                imgObj.style.left = '0px';
+                moveRight(); // Restart the animation
+            }
+        }
+
+        function stop() {
+            clearTimeout(animate);
+            imgObj.style.left = '0px';
+        }
+
+        window.onload = init;
+    </script>
+</head>
+<body>
+    <form>
+        <img id="myImage" src="train.jpg" />
+        <p style="color: blue;">Click the following buttons to handle animation</p>
+        <input type="button" value="Start" onclick="moveRight();" />
+        <input type="button" value="Stop" onclick="stop();" />
+    </form>
+</body>
+</html>
